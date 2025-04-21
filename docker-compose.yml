@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  java-kotlin-app:
+    image: adix99/kotlin-sqlite
+    build:
+      context: ./java-kotlin-app
+    container_name: java-kotlin-container
+    restart: unless-stopped
