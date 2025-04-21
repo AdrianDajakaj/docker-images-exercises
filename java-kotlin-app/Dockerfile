@@ -18,5 +18,15 @@ RUN curl -s https://get.sdkman.io | bash && \
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV PATH="$PATH:/root/.sdkman/candidates/kotlin/current/bin"
 
+# Gradle
+ENV GRADLE_VERSION=8.7
 
-CMD ["java", "-version"]
+RUN curl -fsSL https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o gradle.zip && \
+    unzip gradle.zip -d /opt/ && \
+    ln -s /opt/gradle-${GRADLE_VERSION}/bin/gradle /usr/bin/gradle && \
+    rm gradle.zip
+
+ENV PATH="/opt/gradle-${GRADLE_VERSION}/bin:$PATH"
+
+WORKDIR /app
+COPY . .
