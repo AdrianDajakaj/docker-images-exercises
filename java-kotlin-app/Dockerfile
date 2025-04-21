@@ -30,3 +30,9 @@ ENV PATH="/opt/gradle-${GRADLE_VERSION}/bin:$PATH"
 
 WORKDIR /app
 COPY . .
+
+# Build
+RUN gradle build
+
+# Run Hello
+CMD ["gradle", "run", "--no-daemon"]
